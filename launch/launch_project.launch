@@ -1,0 +1,8 @@
+<launch>
+
+<include file="$(find pitt_object_table_segmentation)/launch/table_segmentation.launch" />
+
+<include file="$(find tensorflow_node)/launch/launch_tensor.launch" />
+
+
+</launch>

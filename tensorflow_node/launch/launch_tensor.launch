@@ -1,0 +1,31 @@
+<launch>
+
+	<!--	###################	TENSORFLOW PARAMETERS	#########################	(do not put any " " on values) -->	
+			 
+	<!-- 			ARGS TO THAT CANNOT BE CHANGED AFTER LAUNCH (comment (or ".") (or <0.0f) (or ) for defaults values)	-->
+
+	   <param name="input_camera" type="str" value= "/cameraB/rgb/image_rect_color"	 			 /> 	
+	   <param name="coordinate_conversion_factor" type="double" value= "0.00178"				 />		
+	   <param name="threshold_error" type="double" value= "0.07" 								 />		
+	   <param name="threshold_ontology_error" type="double" value= "0.5" 								 />		
+
+
+		<!--			ROSTENSORFLOW NODE																				-->
+	<node name="rostensorflow"					pkg="tensorflow_node"					type="rostensorflow.py"			 /> <!-- output="screen"/> -->
+
+
+		<!--			MERGER NODE																						-->
+	<node name="merger"  						pkg="merger_node"						type="merger.py"					 output="screen"/> 
+
+		<!--			RESULT NODE																						-->
+	<node name="results"  						pkg="results_node"						type="results.py"					 output="screen"/> 
+
+		<!--			BROADCASTER NODE																				-->	
+	<node name="tf_broadcaster"  				pkg="tensorflow_node" 					type="broadcaster.py"  />
+
+
+		<!--			ARMOR NODE																				-->	
+	<node name="armor_service"					pkg="armor" type="execute"  			args="it.emarolab.armor.ARMORMainService"/>
+
+
+</launch>
